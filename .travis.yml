@@ -1,10 +1,9 @@
 language: java
-
 jdk:
-  - openjdk8
-  - openjdk9
-  
+- openjdk8
+- openjdk9
 env:
+  matrix:
   - COVERAGE=0.9 TEST_TARGET=./monolithic/ui
   - COVERAGE=0.9 TEST_TARGET=./monolithic/service/cart
   - COVERAGE=0.9 TEST_TARGET=./monolithic/service/user
@@ -12,18 +11,16 @@ env:
   - COVERAGE=0.9 TEST_TARGET=./monolithic/repository/cart
   - COVERAGE=0.9 TEST_TARGET=./monolithic/repository/product
   - COVERAGE=0.31 TEST_TARGET=./monolithic/repository/user
-
+  global:
+    secure: Lxl6dJ6/Je/5OlPIYjd0iVyXFE2hNTC2KhNfXUBOJZu8SLE5oNbELN4eNqead0CM11fz6NPYk5s0nXOw8k0TOvYyk9eO2hTNtbRRlNIDk6txCvBdLIOCBDdNcrTapBeUtPLPtUDIl6nQ+dm4ZcFWFoVQ8n7N/KxDUFCyaMFTX1KPaKTTd/QCn6unit5780LGEyDsByOvwgdvz7ek1+xs+e4CYFT5odyn9FMnjjUmk+YYdjMTUe7FPSKRf615mStTiUCxKS7Wf66GFW1uX9z3FsBBKXHik0SNBWTeA4oAmx7HAzHnTpXbySODLFK6MWghqSLTHNQRoYTgqaq1d/JH5m7DV8P5ubu9Uy/mSKN0CADOBZmiuWe5nqcGF9mrSS4B6Gp0DfYJdRfUYfiWf/8ljmZ5i+HXl22yHPLw4aMkQ5yYCErIGulDPQKvXrKKPNjJGn5r/oO3Q1jw0L7A2GiP65uX/F29HFBP15RYJ5hILoEHaCmFrc+jeUgqCM05Z7A9EZYutDN+PiwS9cmCxBeDv5XkQzcZa/RsOH/2TuSaCeZXESkR14XjS7VhwhLyHlfU0uO4OhiRqhrNl0MghSqi05XPVFQ5y7aqKRW5uKt5RQmyU+gVx3/y5aBpZk9cF08mFFed3wpykUG0dCmYZVbznJiuRnvmOiVMDSIBwOMrVnQ=
 install:
-  - ./gradlew clean jar
-
+- "./gradlew clean jar"
 script:
-  - ./gradlew -p $TEST_TARGET check
-
+- "./gradlew -p $TEST_TARGET check"
 after_success:
-  - find . -name jacocoTestReport.csv|xargs cat|awk -F',' '{print $3" "$4" "$5}'
-
+- find . -name jacocoTestReport.csv|xargs cat|awk -F',' '{print $3" "$4" "$5}'
 deploy:
   provider: script
-  script: echo 'WIP'
+  script: bash -c "echo \"${DOCKER_PASSWORD}\" | docker login --username \"${DOCKER_LOGIN}\" --password-stdin ;"
   on:
     all_branches: true
