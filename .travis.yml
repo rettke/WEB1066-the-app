@@ -10,7 +10,7 @@ env:
   - COVERAGE=0.35 TEST_TARGET=./monolithic/repository/order
   - COVERAGE=0.9 TEST_TARGET=./monolithic/repository/cart
   - COVERAGE=0.9 TEST_TARGET=./monolithic/repository/product
-  - COVERAGE=0.9 TEST_TARGET=./monolithic/repository/user
+  - COVERAGE=0.31 TEST_TARGET=./monolithic/repository/user
 
 install:
   - ./gradlew clean jar
