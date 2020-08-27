@@ -4,7 +4,7 @@ jdk:
   - openjdk8
 
 env:
-  - COVERAGE=0.3 TEST_TARGET=./monolithic/ui
+  - COVERAGE=0.9 TEST_TARGET=./monolithic/ui
   - COVERAGE=0.3 TEST_TARGET=./monolithic/service/cart
   - COVERAGE=0.3 TEST_TARGET=./monolithic/service/user
   - COVERAGE=0.3 TEST_TARGET=./monolithic/repository/order
