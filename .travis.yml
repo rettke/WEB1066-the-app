@@ -24,9 +24,9 @@ after_success:
 before_deploy:
   - "./gradlew -p ./monolithic/ui packageToContainer"
 deploy:
-  - provider: script
+  provider: script
   script:
-    - bash -c "echo \"${DOCKER_PASSWORD}\" | docker login --username \"${DOCKER_USERNAME}\" --password-stdin"
+    - bash -c "echo \"${DOCKER_PASSWORD}\" | docker login --username \"${DOCKER_LOGIN}\" --password-stdin"
     - docker tag zutherb/monolithic-shop:latest $DOCKER_USERNAME/monolithic-shop:latest
     - docker push $DOCKER_LOGIN/monolithic-shop:latest
   on:
