@@ -24,7 +24,7 @@ after_success:
 before_deploy:
   - chmod +x "./script/deploy.sh"
 deploy:
-  - provider: script
+  provider: script
   script: ./script/deploy.sh
   on:
     all_branches: true
